@@ -11,163 +11,146 @@ Finance Dashboard es una aplicación web que te permite gestionar tus finanzas p
 - Informes financieros
 
 ## Requisitos
-- **Python 3.8+**: Lenguaje de programación.
-- **MySQL**: Sistema de gestión de bases de datos.
-- **[XAMPP](https://www.apachefriends.org/es/download.html)** (opcional): Permite ejecutar un servidor web y MySQL de forma local.
+- **Python 3.8+**
+- **MySQL** (puedes usar XAMPP para un entorno local)
 
-## Instalación
+## Instalación y Configuración
 
 ### 1. Clonar el Repositorio
-Este paso consiste en copiar el código del proyecto desde GitHub a tu computadora.
-
-1. Abre una terminal o símbolo del sistema.
-2. Ejecuta el siguiente comando para clonar el repositorio:
-   ```bash
-   git clone https://github.com/DeveloperGerard/FinanceDashboard.git
-   ```
-3. Entra en la carpeta del proyecto:
-   ```bash
-   cd FinanceDashboard
-   ```
+Clona el repositorio privado en tu cuenta personal de GitHub:
+```bash
+git clone https://github.com/N45h0/finance-dashboard-3.git
+cd FinanceDashboard
+```
 
 ### 2. Crear y Activar el Entorno Virtual
-El entorno virtual es un espacio aislado para instalar las dependencias del proyecto sin interferir con otras instalaciones de Python.
-
-1. Para crear el entorno virtual, ejecuta:
-   ```bash
-   python -m venv venv
-   ```
-   Esto creará una carpeta llamada `venv` donde se almacenarán las librerías del proyecto.
-
-2. Activa el entorno virtual:
-   - **En sistemas Unix/Linux/MacOS**:
-     ```bash
-     source venv/bin/activate
-     ```
-   - **En Windows**:
-     ```bash
-     venv\Scripts\activate
-     ```
-   Una vez activado, verás que el prompt de tu terminal cambia (aparecerá algo como `(venv)` al inicio).
+Crea y activa un entorno virtual para aislar las dependencias:
+```bash
+python -m venv venv
+# En Windows:
+venv\Scripts\activate
+# En Linux/Mac:
+source venv/bin/activate
+```
 
 ### 3. Instalar Dependencias
-Las dependencias son las librerías y paquetes que el proyecto necesita para funcionar.
-
-1. Con el entorno virtual activado, ejecuta:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   Este comando leerá el archivo `requirements.txt` e instalará todas las librerías necesarias.
-
-### 4. Configuración Automática de la Base de Datos y Migraciones
-El siguiente paso automatiza la creación de la base de datos y la estructura de las tablas, sin necesidad de hacerlo manualmente.
-
-#### a) Crear la Base de Datos Automáticamente
-El proyecto utiliza **SQLAlchemy** para conectarse a MySQL y crear la base de datos "finance" si aún no existe. Abre el archivo de configuración (por ejemplo, `__init__.py`) y añade lo siguiente:
-
-```python
-from sqlalchemy import create_engine,text
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-app = Flask(__name__)
-
-# Cadena de conexión sin especificar la base de datos.
-# Cambia 'usuario' y 'contraseña' por tus credenciales de MySQL.
-db_uri_base = 'mysql+pymysql://usuario:contraseña@localhost/'
-
-# Conectarse a MySQL y crear la base de datos si no existe.
-engine = create_engine(db_uri_base)
-with engine.connect() as connection:
-    connection.execute(text("CREATE DATABASE IF NOT EXISTS finance"))
-
-
-# Configurar la aplicación para usar la base de datos "finance".
-app.config['SQLALCHEMY_DATABASE_URI'] = db_uri_base + 'finance'
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-```
-
-**Explicación:**  
-- Se conecta a MySQL sin seleccionar una base de datos específica.
-- Se ejecuta una instrucción SQL que crea la base de datos **finance** si no existe.
-- Luego, se configura la aplicación Flask para usar esa base de datos.
-
-#### b) Automatizar las Migraciones
-Las migraciones permiten crear y actualizar la estructura (tablas) de la base de datos de forma organizada. Para automatizarlas, puedes usar un script de shell llamado `setup.sh`.
-
-1. Crea un archivo llamado `setup.sh` en la raíz del proyecto y pega el siguiente contenido:
-
-   ```bash
-   #!/bin/bash
-   # Verificar que estamos en la carpeta correcta
-   if [ ! -f "requirements.txt" ]; then
-     echo "Por favor, ejecuta este script desde la raíz del repositorio."
-     exit 1
-   fi
-
-   echo "Activando el entorno virtual..."
-   # Activa el entorno virtual (modifica la línea según tu sistema operativo)
-   source venv/bin/activate
-
-   echo "Inicializando migraciones..."
-   flask db init
-
-   echo "Creando la migración inicial..."
-   flask db migrate -m "Migración inicial"
-
-   echo "Aplicando migraciones..."
-   flask db upgrade
-
-   echo "Iniciando la aplicación..."
-   python server.py
-   ```
-
-2. Dale permisos de ejecución al script:
-   ```bash
-   chmod +x setup.sh
-   ```
-
-3. Ejecuta el script:
-   ```bash
-   ./setup.sh
-   ```
-
-**Explicación del Script:**  
-- **Activación del entorno virtual:** Asegura que se usen las librerías correctas.
-- **Migraciones:**  
-  - `flask db init`: Inicializa la carpeta de migraciones.
-  - `flask db migrate`: Genera una migración basada en los cambios del modelo.
-  - `flask db upgrade`: Aplica la migración a la base de datos, creando las tablas necesarias.
-- **Inicio de la aplicación:** Finalmente, inicia el servidor Flask.
-
-### 5. Iniciar la Aplicación Manualmente (Opcional)
-Si prefieres ejecutar cada comando de forma individual o ya configuraste la base de datos y migraciones, simplemente inicia el servidor con:
+Instala las dependencias del proyecto:
 ```bash
-flask run
+pip install -r requirements.txt
 ```
 
-## Recomendaciones Adicionales: Uso de Visual Studio Code
-Aunque es posible realizar todos estos pasos de manera nativa con cualquier editor y terminal, **recomendamos el uso de Visual Studio Code (VS Code)** por las siguientes razones:
+### 4. Configurar Variables de Entorno
+Copia el archivo `.env.example` a `.env` y edítalo con tus datos reales:
+```bash
+# En Linux/Mac:
+cp .env.example .env
+# En Windows:
+copy .env.example .env
+```
+Edita `.env` para poner tus credenciales de base de datos, claves secretas y rutas de credenciales de Google.
 
-- **Terminal Integrada:**  
-  VS Code permite abrir una terminal integrada (usualmente con el atajo ``Ctrl+` ``) en la misma ventana, lo que facilita la ejecución de comandos sin cambiar de aplicación.
+### 5. Configurar Credenciales de Google
+- Descarga tu archivo `client_secret_XXXX.json` desde Google Cloud Console y colócalo en la raíz del proyecto.
+- Asegúrate de que el nombre y la ruta coincidan con lo especificado en `.env`.
+- Este archivo está en `.gitignore` y **no debe subirse al repositorio**.
 
-- **Control de Versiones:**  
-  Cuenta con integración nativa con Git, lo que permite clonar, gestionar ramas y hacer commits de manera visual y sencilla.
+### 6. Inicializar la Base de Datos y Migraciones
+Puedes usar el script automático:
+```bash
+# En Windows:
+setup.bat
+# En Linux/Mac:
+./setup.sh
+```
+O manualmente:
+```bash
+flask db init
+flask db migrate -m "Migración inicial"
+flask db upgrade
+```
 
-- **Extensiones y Complementos:**  
-  Existen extensiones para Python y Flask que proporcionan resaltado de sintaxis, autocompletado, depuración y otros útiles recursos.
+### 7. Ejecutar la Aplicación
+```bash
+python server.py
+```
+La aplicación estará disponible en `http://localhost:5000`.
 
-- **Navegación y Edición de Código:**  
-  La interfaz de VS Code facilita la búsqueda y navegación por el código, permitiendo encontrar rápidamente funciones, variables y archivos.
+## Recomendaciones de Seguridad y Buenas Prácticas
+- Nunca subas archivos de credenciales ni `.env` a git.
+- Cambia las claves secretas y salts antes de producción.
+- Revisa y actualiza `.gitignore` para proteger información sensible.
+- Sube el proyecto a un repositorio privado en tu cuenta personal de GitHub antes de producción.
 
-- **Configuraciones y Tareas Automatizadas:**  
-  Puedes configurar tareas automatizadas (por ejemplo, para ejecutar scripts de configuración o pruebas) que se integran directamente en el entorno de desarrollo.
+## Personalización y Desarrollo
+- Puedes personalizar el favicon reemplazando el archivo `app/static/favicon.ico`.
+- Se recomienda usar Visual Studio Code por su terminal integrada, control de versiones y extensiones útiles para Python y Flask.
 
-Si deseas aprovechar estas funcionalidades, descarga e instala [Visual Studio Code](https://code.visualstudio.com/), abre la carpeta del proyecto y explora las opciones en el menú lateral para Git, Terminal y Extensiones.
+## Despliegue en Producción
+1. Verifica que `.env` y los archivos de credenciales **no estén en el repositorio**.
+2. Configura las variables de entorno y credenciales en el servidor de producción.
+3. Realiza migraciones y ejecuta la aplicación como en local.
 
-## Personalización
-- **Favicon:**  
-  El ícono de la pestaña del navegador se encuentra en el archivo `favicon.ico`. Puedes reemplazarlo con tu propio ícono para personalizar la aplicación.
+## Despliegue en Hosting Compartido con DirectAdmin (sin SSH)
+
+### 1. Preparar el Proyecto para Subir
+- **No subas**: carpetas `venv/`, `env/`, `__pycache__/`, archivos `.pyc`, `.env`, archivos de credenciales sensibles (`client_secret*.json`, `token.pickle`), ni nada listado en `.gitignore`.
+- **Sí sube**: todo el código fuente, carpetas `app/`, `requirements.txt`, `config.py`, `server.py`, archivos de migración si los tienes, y archivos estáticos/plantillas.
+- **Recomendado**: Comprime solo lo necesario en un `.zip` (ver ejemplo abajo).
+
+#### Ejemplo de estructura a comprimir:
+```
+app/
+config.py
+requirements.txt
+server.py
+setup.sh
+setup.bat
+README.md
+.env.example
+migrations/ (si existe)
+static/ (si existe)
+templates/ (si existe)
+```
+
+### 2. Subir y Descomprimir el Proyecto
+- Usa el administrador de archivos de DirectAdmin para subir el `.zip` a la carpeta de tu app Python (usualmente fuera de `public_html`).
+- Descomprime el archivo desde el panel.
+
+### 3. Crear la Aplicación Python en DirectAdmin
+- Ve a "Setup Python App" en el panel.
+- Elige la versión de Python (3.8+ recomendado).
+- Define la ruta donde subiste el proyecto.
+- En "Application startup file" pon: `passenger_wsgi.py`
+- En "Application entry point" pon: `app`
+
+### 4. Crear el archivo WSGI
+Crea un archivo llamado `passenger_wsgi.py` en la raíz del proyecto con este contenido:
+```python
+from app import create_app
+app = create_app()
+```
+
+### 5. Instalar Dependencias
+- En el panel de la app Python, usa la opción para instalar paquetes desde `requirements.txt`.
+
+### 6. Configurar Variables de Entorno
+- En el panel, agrega manualmente las variables de entorno que estaban en tu `.env` (por ejemplo: `SECRET_KEY`, `DATABASE_URL`, etc.).
+
+### 7. Configurar la Base de Datos
+- Crea la base de datos y usuario desde DirectAdmin.
+- Actualiza la variable `DATABASE_URL` con los datos reales.
+
+### 8. Migraciones y Archivos Estáticos
+- Si no tienes SSH, ejecuta migraciones localmente y sube la base de datos migrada, o pide soporte al hosting para ejecutar comandos.
+- Asegúrate de que los archivos estáticos y plantillas estén en las carpetas correctas.
+
+### 9. Probar la Aplicación
+- Accede a tu dominio/subdominio y verifica que la app funcione correctamente.
+
+#### Notas de Seguridad
+- Nunca subas `.env` ni archivos de credenciales reales.
+- Cambia las claves secretas y salts antes de producción.
+- Usa un repositorio privado para tu código fuente.
+
+## Contacto
+Para dudas o soporte, contacta al desarrollador principal.

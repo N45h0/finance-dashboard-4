@@ -16,7 +16,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'mysql://root:@localhost/finance')
     SQLALCHEMY_TRACK_MODIFICATIONS = False    # Configuración de correo (Gmail API)
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', 'yourfincancedashboardp@gmail.com')
-    GOOGLE_CREDENTIALS_PATH = os.getenv('GOOGLE_CREDENTIALS_PATH', 'PCclient_secret_746869307344-lsub4po2puj9ehtiqqs40mvtv0hl37p1.apps.googleusercontent.com.json')
+    GOOGLE_CREDENTIALS_PATH = os.getenv('GOOGLE_CREDENTIALS_PATH', 'client_secret_746869307344-lsub4po2puj9ehtiqqs40mvtv0hl37p1.apps.googleusercontent.com.json')
     GOOGLE_TOKEN_PATH = os.getenv('GOOGLE_TOKEN_PATH', 'token.pickle')
 
     # Seguridad
