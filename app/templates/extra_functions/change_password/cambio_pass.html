@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Cambio de Contraseña</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1>Cambiar contraseña</h1>
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        {{form.clave.label()}}
+        {{form.clave()}}
+        {{form.confirmar.label()}}
+        {{form.confirmar()}}
+        {{form.submit()}}
+
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+{% extends 'base.html' %}
+
+{% block title %}Crear Ingreso{% endblock %}
+
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Crear Ingreso</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        {{form.nombre.label()}}
+        {{form.nombre()}}
+        {{form.fecha_pago.label()}}
+        {{form.fecha_pago()}}
+        {{form.monto.label()}}
+        {{form.monto()}}
+        {{form.descripcion.label()}}
+        {{form.descripcion()}}
+        {{form.categoria.label()}}
+        {{form.categoria()}}
+        {{form.submit()}}
+
+    </form>
+</body>
+</html>

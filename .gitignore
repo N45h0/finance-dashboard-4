@@ -1,0 +1,11 @@
+instance/
+venv/
+__pycache__
+*.pyc
+.env 
+.pytest_cache
+migrations/
+nota.txt
+notas/
+client_secret*.json
+*.pickle

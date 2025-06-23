@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Servicio</title>
+    {% block head %}
+    <script src="{{url_for('static',filename='js/update/update_service.js')}}" defer></script>
+    {% endblock %}
+</head>
+<body>
+{% extends 'base.html' %}
+{% block title %}Actualizar Servicio{% endblock %}
+{% block content %}
+<form action="" method="POST">
+    {{form.hidden_tag()}}
+    {{form.nombre.label()}}
+    {{form.nombre(id="name")}}
+    {{form.descripcion.label()}}
+    {{form.descripcion(id="description")}}
+    {{form.categoria.label()}}
+    {{form.categoria(id="category")}}
+    {{form.precio.label()}}
+    {{form.precio(id="price")}}
+    {{form.fecha_vencimiento.label()}}
+    {{form.fecha_vencimiento(id="expiration_date")}}
+    <select name="service" id="service_object">
+        {% for service in services %}
+            <option value="{{service.id}}">{{service.service_name}}</option>
+        {% endfor %}
+    </select>
+    {% if services %}
+        {{form.submit()}}
+    {% else %}
+        <p>No hay servicios que actualizar</p>
+    {% endif %}
+</form>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+{% extends 'base.html' %}
+
+{% block title %}Crear Servicio{% endblock %}
+
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Crear Servicio</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        {{form.nombre.label()}}
+        {{form.nombre()}}
+        {{form.descripcion.label()}}
+        {{form.descripcion()}}
+        {{form.categoria.label()}}
+        {{form.categoria()}}
+        {{form.precio.label()}}
+        {{form.precio()}}
+        {{form.fecha_vencimiento.label()}}
+        {{form.fecha_vencimiento()}}
+        <select name="cuenta">
+            {% for account in accounts %}
+                <option value="{{account.id}}">{{account.account_name}}</option>
+            {% endfor %}
+        </select>
+        {% if accounts %}
+            {{form.submit()}}
+        {% else %}
+            <p>Para crear un servicio necesitas una cuenta</p>
+        {% endif %}
+        {% for error in nombre.errors %}
+            {{ error }}
+        {% endfor %}
+        {% for error in precio.errors %}
+            {{error}}
+        {% endfor %}
+    </form>
+</body>
+</html>

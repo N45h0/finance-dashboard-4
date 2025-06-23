@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Cambio de Contraseña</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    {% if not enviado %}
+        <h1>Recuperar contraseña</h1>
+        <form method="POST">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Enviar solicitud</button>
+        </form>
+    {% else %}
+        <h1>Si el correo existe, se ha enviado una solicitud de cambio de contraseña</h1>
+        <p>
+            Ve a tu bandeja de entrada para realizar el cambio de contraseña
+        </p>
+    {% endif %}
+</body>
+</html>
