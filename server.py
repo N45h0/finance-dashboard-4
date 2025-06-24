@@ -1,12 +1,10 @@
-"""
-Archivo despliegue
-"""
+# server.py
+# Este es el archivo que Gunicorn usará como punto de entrada.
 
-from app import create_app, db
-from flask_migrate import Migrate
+from app import create_app
 
-app = create_app()  # aplicacion
-migrate = Migrate(app, db)  # inicializar Flask-Migrate
+app = create_app()
 
-if __name__=="__main__":
-    app.run(debug=True)
+# No es necesario nada más aquí.
+# No llames a app.run(). Gunicorn se encarga de todo.
+# Las rutas deben definirse dentro de tu 'create_app' o en los blueprints que importa.
