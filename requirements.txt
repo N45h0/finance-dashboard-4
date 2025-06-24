@@ -37,6 +37,7 @@ numpy==2.2.6
 openai-whisper @ git+https://github.com/openai/whisper.git@dd985ac4b90cafeef8712f2998d62c59c3e62d22
 packaging==25.0
 pefile==2023.2.7
+psycopg2-binary
 pillow==11.2.1
 pyinstaller==6.13.0
 pyinstaller-hooks-contrib==2025.3
