@@ -20,9 +20,9 @@ def create_app():
     import locale
     sys.stdout.reconfigure(encoding='utf-8')
     try:
-    locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+        locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
     except locale.Error:
-    print("Locale 'es_ES.UTF-8' not supported, continuing with default locale.")
+        print("Locale 'es_ES.UTF-8' not supported, continuing with default locale.")
     
     # Cargar configuración
     app.config.from_object(Config)
