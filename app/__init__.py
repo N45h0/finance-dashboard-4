@@ -29,7 +29,7 @@ def create_app():
 
     
     # Configurar la URI de la base de datos
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri_base
+    #app.config['SQLALCHEMY_DATABASE_URI'] = db_uri_base
     
     # Inicializar extensiones con la app
     db.init_app(app)
