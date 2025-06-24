@@ -23,11 +23,7 @@ def create_app():
     
     # Cargar configuración
     app.config.from_object(Config)
-      # Obtener la configuración de la base de datos desde las variables de entorno
-    db_uri_base = Config.SQLALCHEMY_DATABASE_URI
-    engine = create_engine(db_uri_base.rsplit('/', 1)[0])
-    with engine.connect() as connection:
-        connection.execute(text("CREATE DATABASE IF NOT EXISTS " + db_uri_base.rsplit('/', 1)[1]))
+
     
     # Configurar la URI de la base de datos
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri_base
