@@ -62,7 +62,8 @@ def reenviar_token():
     user  = User().get_by_id(current_user.id)
     token = genera_token(user.email)
     send_gmail_confirmation(token)
-    return redirect("https://mail.google.com/")
+    # Mostrar mensaje en la web en vez de redirigir a Gmail
+    return render_template("extra_functions/confirmation.html", mensaje="Token reenviado. Revisa tu correo electrónico.")
 
 #----------------Estas funciones permiten el acceso a informacion del usuario para que se carge en los formularios de actualizacion----------
 @extra_functions_bp.route("/informacion_cuenta/<int:id>")

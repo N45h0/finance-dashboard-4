@@ -4,6 +4,8 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from config import Config
 from sqlalchemy import create_engine, text
+import secrets
+from flask import g, request, after_this_request
 
 # Inicializar extensiones
 db = SQLAlchemy()
@@ -65,5 +67,21 @@ def create_app():
     app.register_blueprint(extra_functions_bp)
     app.register_blueprint(public_bp)
     app.register_blueprint(bp_gmail_oauth)
+
+    # --- CSP y Nonce ---
+    @app.before_request
+    def set_csp_nonce():
+        g.csp_nonce = secrets.token_urlsafe(16)
+
+    @app.context_processor
+    def inject_csp_nonce():
+        return {'csp_nonce': getattr(g, 'csp_nonce', '')}
+
+    @app.after_request
+    def set_csp_header(response):
+        nonce = getattr(g, 'csp_nonce', '')
+        csp = f"default-src 'self'; script-src 'self' 'nonce-{nonce}' https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleusercontent.com; connect-src 'self' https://accounts.google.com https://oauth2.googleapis.com; frame-src https://accounts.google.com;"
+        response.headers['Content-Security-Policy'] = csp
+        return response
 
     return app

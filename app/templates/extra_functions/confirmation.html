@@ -74,6 +74,9 @@
 <body>
     <div class="container">
         <h1>¡Confirma tu correo para acceder a la web!</h1>
+        {% if mensaje %}
+            <p style="color: green;">{{ mensaje }}</p>
+        {% endif %}
         <p>Ve a tu Bandeja de entrada de Email y confirma tu email.</p>
         <p>Si no has recibido el correo, puedes solicitar un nuevo token.</p>
         <a class="btn" href="/reenviartoken">Solicitar nuevo Token</a>

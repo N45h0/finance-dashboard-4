@@ -5,6 +5,9 @@ Flask-Migrate
 psycopg2-binary
 python-dotenv
 alembic
+itsdangerous
+Werkzeug
+WTForms
 
 # --- Solo si los usas para formularios y login ---
 Flask-Login
