@@ -113,10 +113,16 @@ def login_google_callback():
     if not user:
         # Registrar usuario si no existe
         from werkzeug.security import generate_password_hash
-        user = User(username=name, email=email, password_hash=generate_password_hash(os.urandom(16).hex()))
+        user = User(username=name, email=email, password_hash=generate_password_hash(os.urandom(16).hex()), email_conf=True)
         from app import db
         db.session.add(user)
         db.session.commit()
+    else:
+        # Si el usuario ya existe y no tiene email_conf, lo marcamos como confirmado
+        if not user.email_conf:
+            user.email_conf = True
+            from app import db
+            db.session.commit()
     login_user(user)
     return redirect(url_for('auth_bp.home'))
 
