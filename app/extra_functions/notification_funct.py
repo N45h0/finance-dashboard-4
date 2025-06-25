@@ -3,7 +3,7 @@
 """
 
 from flask_login import current_user
-from flask import render_template, current_app
+from flask import render_template, current_app, url_for
 from app.models.importaciones import User, Email_message
 from app.extra_functions.gmail_service import send_email as gmail_send_email
 import random
@@ -55,12 +55,13 @@ def send_gmail_confirmation(token):
     Envía la plantilla para confirmar tu correo con el token de seguridad
     """
     user = User().get_by_id(current_user.id)
+    confirm_url = url_for('extra_functions.confirm_email', token=token, _external=True)
     return send_email(
         to_email=current_user.email,
         subject="Confirmacion de correo",  # Sin tilde para evitar problemas
         template_name="extra_functions/mailconfirmation.html",
         username=user.username,
-        token=token
+        confirm_url=confirm_url
     )
 
 def send_changepassword_request(token, user=None):
