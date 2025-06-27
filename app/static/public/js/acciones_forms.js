@@ -46,11 +46,23 @@ function toggleAccountForm() {
     }
 }
 
+// Mostrar/ocultar formulario de ingresos
 function toggleIncomeForm() {
-    const form = document.getElementById("incomeForm");
-    if (form) {
-        form.classList.toggle("d-none");
-        form.classList.toggle("show");
+    var formContainer = document.getElementById('incomeForm');
+    if (formContainer) {
+        formContainer.style.display = formContainer.style.display === 'none' || formContainer.classList.contains('d-none')
+            ? (formContainer.classList.remove('d-none'), 'block')
+            : (formContainer.classList.add('d-none'), 'none');
+    }
+}
+
+// Mostrar/ocultar formulario de ingresos programados
+function toggleScheduledIncomeForm() {
+    var formContainer = document.getElementById('income-form-containers');
+    if (formContainer) {
+        formContainer.style.display = formContainer.style.display === 'none' || formContainer.classList.contains('d-none')
+            ? (formContainer.classList.remove('d-none'), 'block')
+            : (formContainer.classList.add('d-none'), 'none');
     }
 }
 
