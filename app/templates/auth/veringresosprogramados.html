@@ -4,19 +4,18 @@
 
 {% block head %}
 <meta name="csrf-token" content="{{ csrf_token }}">
-<link rel="stylesheet" href="{{url_for('static',filename='auth/css/viewscheduledincomes.css')}}">
 {% endblock %}
 
 {% block content %}
 <div class="incomes-section">
     <h1 class="mb-4">Mis Ingresos programados</h1>
 
-    <div class="add-income-btn">
+    <div class="add-income-btn" onclick="toggleIncomeForm()">
         <i class="fas fa-plus-circle mr-2"></i>Agregar Ingreso
     </div>
 
     <!-- Income Form -->
-    <div id="incomeForm" class="form-container d-none">
+    <div id="income-form-containers" class="form-container">
         <form action="{{ url_for('create_functions.crear_ingreso_programado') }}" method="POST">
             {{form.hidden_tag()}}
             <div class="form-group">
@@ -106,7 +105,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <form action="{{ url_for('extra_functions.borrar_ingresoprogramado', id=income.id) }}" method="POST" data-confirm-eliminar data-nombre-cuenta="{{ income.income_name }}">
+                                                <form action="{{ url_for('extra_functions.borrar_ingresoprogramado', id=income.id) }}" method="POST">
                                                     <button type="submit" class="dropdown-item text-danger">
                                                         <i class="fas fa-trash-alt"></i> Borrar
                                                     </button>
@@ -128,4 +127,10 @@
     {% endif %}
 </div>
 
+<script>
+    function toggleIncomeForm() {
+        var formContainer = document.getElementById('income-form-containers');
+        formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
 {% endblock %}
