@@ -61,7 +61,7 @@ function toggleScheduledIncomeForm() {
 
 // Mostrar/ocultar formulario de servicios en pagos
 function toggleServiceForm() {
-    var formContainer = document.getElementById('service-form-container');
+    var formContainer = document.getElementById('serviceForm'); // Corregido: coincide con el id en verservicios.html
     if (formContainer) {
         formContainer.classList.toggle('d-none');
     }
