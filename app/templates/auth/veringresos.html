@@ -4,6 +4,7 @@
 
 {% block head %}
 <meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/css/viewincomes.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -104,4 +105,10 @@
 
     </div>
 </div>
+<script>
+    function toggleIncomeForm() {
+        var formContainer = document.getElementById('incomeForm');
+        formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
 {% endblock %}

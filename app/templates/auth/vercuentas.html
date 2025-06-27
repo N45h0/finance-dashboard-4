@@ -4,6 +4,7 @@
 
 {% block head %}
 <meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/css/viewaccounts.css') }}">
 {% endblock %}
 
 {% block content %}
