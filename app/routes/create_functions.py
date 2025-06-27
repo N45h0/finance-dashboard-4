@@ -36,7 +36,7 @@ def crear_cuenta():
 
             #actualizamos saldo del usuario 
             user = User().get_by_id(current_user.id)
-            user.balance = user.balance +saldo
+            user.balance = (user.balance or 0) + saldo
 
             AccountController().create_account(nombre,tarjeta,current_user.id,saldo)
             return redirect("/index")
@@ -68,11 +68,11 @@ def crear_ingreso():
 
             #actualizamos el saldo total del usuario
             usuario         = User().get_by_id(current_user.id)
-            usuario.balance = usuario.balance + monto
+            usuario.balance = (usuario.balance or 0) + monto
             UserController().update_user(usuario)
             #actualizamos el saldo de la cuenta 
             account         = Account().get_by_id(account_id)
-            account.balance = account.balance + monto
+            account.balance = (account.balance or 0) + monto
             AccountController().update_account(account)
             return redirect("/veringresos")
 
@@ -177,10 +177,10 @@ def pago_prestamo():
                 #Evaluamos si el usuario pago mas de lo que cuesta 
                 if monto > prestamo.reamining_price:
                     monto = prestamo.reamining_price
-                    account.balance = account.balance - monto
+                    account.balance = (account.balance or 0) - monto
                 else:
                     monto  = form.monto.data
-                    account.balance = account.balance - monto
+                    account.balance = (account.balance or 0) - monto
                 
                 ultimos_pagos = Loan_payment().get_all_by_loan(prestamo.id)
                 ultimo_pago = monto
@@ -194,7 +194,7 @@ def pago_prestamo():
                     if fecha_pago > prestamo.expiration_date:
                         print("es tarde para pagar")
                         monto =float(monto+calcular_tem(prestamo.tea,prestamo.quota)*ultimo_pago) 
-                        account.balance = account.balance - monto
+                        account.balance = (account.balance or 0) - monto
                         print(ultimo_pago)
                 print(f"monto:{monto}")
                 descrip = form.descripcion.data
@@ -208,7 +208,7 @@ def pago_prestamo():
                 #actualizamos el saldo de la cuenta de usuario
 
                 user = User().get_by_id(current_user.id)
-                user.balance = user.balance -monto
+                user.balance = (user.balance or 0) - monto
                 UserController().update_user(user)
                 return redirect("/verprestamos")
         else:
@@ -253,7 +253,7 @@ def pago_servicio():
 
                 #actualizamos el monto de la cuenta usuario
                 user = User().get_by_id(current_user.id)
-                user.balance = user.balance -monto
+                user.balance = (user.balance or 0) - monto
                 UserController().update_user(user)
                 return redirect("/verservicios")
         else:
