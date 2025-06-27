@@ -88,7 +88,7 @@
                             <td data-label="Descripcion ">{{ income.description }}</td>
                             <td data-label="Categoria">{{ income.category }}</td>
                             <td>
-                                <form action="{{ url_for('extra_functions.borrar_ingreso', id=income.id) }}" method="POST">
+                                <form action="{{ url_for('extra_functions.borrar_ingreso', id=income.id) }}" method="POST" data-confirm-eliminar data-nombre-cuenta="{{ income.income_name }}">
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i> Borrar
                                     </button>

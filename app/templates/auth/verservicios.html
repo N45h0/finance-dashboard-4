@@ -111,7 +111,7 @@
                                             </li>
                                         {% endif %}
                                         <li>
-                                            <form action="{{ url_for('extra_functions.borrar_servicio', id=service.id) }}" method="POST">
+                                            <form action="{{ url_for('extra_functions.borrar_servicio', id=service.id) }}" method="POST" data-confirm-eliminar data-nombre-cuenta="{{ service.service_name }}">
                                                 <button type="submit" class="dropdown-item text-danger">
                                                     <i class="fas fa-trash-alt"></i> Borrar
                                                 </button>

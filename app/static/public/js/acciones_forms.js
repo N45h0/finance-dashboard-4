@@ -25,6 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".add-loan-btn").forEach(btn => {
         btn.addEventListener("click", toggleLoanForm);
     });
+
+    // Confirmar eliminación de cuenta
+    document.querySelectorAll("form[data-confirm-eliminar]").forEach(form => {
+        form.addEventListener("submit", function(event) {
+            const nombreCuenta = this.getAttribute("data-nombre-cuenta") || "la cuenta";
+            if (!confirm(`¿Estás seguro de que quieres eliminar la cuenta "${nombreCuenta}"? Esta acción no se puede deshacer.`)) {
+                event.preventDefault();
+            }
+        });
+    });
 });
 
 // Lógica para mostrar/ocultar formularios
