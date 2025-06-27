@@ -41,17 +41,4 @@
     {% endif %}
 
 </div>
-
-<script>
-    function toggleServiceForm() {
-        var formContainer = document.getElementById('service-form-container');
-        formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
-    }
-    function confirmarEliminacion(event, nombreServicio) {
-    event.preventDefault(); // Evita el envío inmediato del formulario
-    if (confirm(`¿Estás seguro de que quieres eliminar el servicio "${nombreServicio}"? Esta acción no se puede deshacer.`)) {
-        event.target.submit(); // Envía el formulario si el usuario confirma
-    }
-}
-</script>
 {% endblock %}

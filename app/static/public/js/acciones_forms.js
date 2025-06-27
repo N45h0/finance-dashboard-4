@@ -59,8 +59,12 @@ function toggleScheduledIncomeForm() {
     toggleFormById("income-form-containers");
 }
 
+// Mostrar/ocultar formulario de servicios en pagos
 function toggleServiceForm() {
-    toggleFormById("serviceForm");
+    var formContainer = document.getElementById('service-form-container');
+    if (formContainer) {
+        formContainer.classList.toggle('d-none');
+    }
 }
 
 function toggleLoanForm() {
@@ -77,4 +81,12 @@ function formatCardNumber(input) {
         formatted += value.substring(i, i + 4);
     }
     input.value = formatted;
+}
+
+// Confirmar eliminación de servicio (puede usarse en otras vistas)
+function confirmarEliminacion(event, nombreServicio) {
+    event.preventDefault();
+    if (confirm(`¿Estás seguro de que quieres eliminar el servicio "${nombreServicio}"? Esta acción no se puede deshacer.`)) {
+        event.target.submit();
+    }
 }
