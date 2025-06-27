@@ -39,6 +39,7 @@ def crear_cuenta():
             user.balance = (user.balance or 0) + saldo
 
             AccountController().create_account(nombre,tarjeta,current_user.id,saldo)
+            flash("¡Cuenta creada exitosamente!", "success")
             return redirect("/index")
         else:
             return "false"
@@ -74,6 +75,7 @@ def crear_ingreso():
             account         = Account().get_by_id(account_id)
             account.balance = (account.balance or 0) + monto
             AccountController().update_account(account)
+            flash("¡Ingreso registrado exitosamente!", "success")
             return redirect("/veringresos")
 
 
@@ -97,6 +99,7 @@ def crear_ingreso_programado():
             monto           = form.monto.data
             account_id      = int(request.form.get("cuenta"))
             ScheduledIncomeController().create_income(nombre,fecha,monto,current_user.id,descripcion,categoria=categoria,next_income=proximo_pago,received_amount=0,pending_amount=monto,account_id=account_id)
+            flash("¡Ingreso programado creado exitosamente!", "success")
             return redirect("/index")
         
 
@@ -122,6 +125,7 @@ def crear_servicio():
             precio      = form.precio.data
             cuenta      = int(request.form.get("cuenta"))
             ServiceController().create_service(nombre,descripcion,fecha,categoria,current_user.id,precio,precio,cuenta,vencimiento)
+            flash("¡Servicio creado exitosamente!", "success")
             return redirect("/")
         else:
             return render_template("auth/verservicios.html",form=form)
@@ -146,6 +150,7 @@ def crear_prestamo():
             vencimiento = form.fecha_vencimiento.data
             cuenta      = int(request.form.get("cuenta"))
             LoanController().create_loan(nombre,titular,precio,cuota,current_user.id,cuenta,precio,fecha,vencimiento,descripcion,tea)
+            flash("¡Préstamo creado exitosamente!", "success")
             return redirect("/index")
         else:
             print("error")
