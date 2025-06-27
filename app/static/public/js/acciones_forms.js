@@ -38,48 +38,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Lógica para mostrar/ocultar formularios
-function toggleAccountForm() {
-    const form = document.getElementById("accountForm");
+function toggleFormById(formId) {
+    const form = document.getElementById(formId);
     if (form) {
         form.classList.toggle("d-none");
-        form.classList.toggle("show");
     }
+}
+
+function toggleAccountForm() {
+    toggleFormById("accountForm");
 }
 
 // Mostrar/ocultar formulario de ingresos
 function toggleIncomeForm() {
-    var formContainer = document.getElementById('incomeForm');
-    if (formContainer) {
-        formContainer.style.display = formContainer.style.display === 'none' || formContainer.classList.contains('d-none')
-            ? (formContainer.classList.remove('d-none'), 'block')
-            : (formContainer.classList.add('d-none'), 'none');
-    }
+    toggleFormById("incomeForm");
 }
 
 // Mostrar/ocultar formulario de ingresos programados
 function toggleScheduledIncomeForm() {
-    var formContainer = document.getElementById('income-form-containers');
-    if (formContainer) {
-        formContainer.style.display = formContainer.style.display === 'none' || formContainer.classList.contains('d-none')
-            ? (formContainer.classList.remove('d-none'), 'block')
-            : (formContainer.classList.add('d-none'), 'none');
-    }
+    toggleFormById("income-form-containers");
 }
 
 function toggleServiceForm() {
-    const form = document.getElementById("serviceForm");
-    if (form) {
-        form.classList.toggle("d-none");
-        form.classList.toggle("show");
-    }
+    toggleFormById("serviceForm");
 }
 
 function toggleLoanForm() {
-    const form = document.getElementById("loanForm");
-    if (form) {
-        form.classList.toggle("d-none");
-        form.classList.toggle("show");
-    }
+    toggleFormById("loanForm");
 }
 
 // Lógica para formatear el número de tarjeta en tiempo real
