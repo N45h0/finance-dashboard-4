@@ -11,12 +11,12 @@
 <div class="incomes-section">
     <h1 class="mb-4">Mis Ingresos</h1>
 
-    <div class="add-income-btn" onclick="toggleIncomeForm()">
+    <div class="add-income-btn">
         <i class="fas fa-plus-circle mr-2"></i>Agregar Ingreso
     </div>
 
     <!-- Income Form -->
-    <div id="income-form-container" class="form-container">
+    <div id="incomeForm" class="form-container d-none">
         <form action="{{ url_for('create_functions.crear_ingreso') }}" method="POST">
             {{form.hidden_tag()}}
             <div class="form-group">
@@ -107,7 +107,7 @@
 </div>
 <script>
     function toggleIncomeForm() {
-        var formContainer = document.getElementById('income-form-container');
+        var formContainer = document.getElementById('incomeForm');
         formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
     }
 </script>

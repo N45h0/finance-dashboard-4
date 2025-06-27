@@ -18,12 +18,12 @@
 <div class="loans-section">
     <h1 class="mb-4">Mis Préstamos</h1>
 
-    <div class="add-loan-btn" onclick="toggleLoanForm()">
+    <div class="add-loan-btn">
         <i class="fas fa-plus-circle mr-2"></i>Agregar Préstamo
     </div>
 
     <!-- Loan Form -->
-    <div id="loan-form-container" class="form-container">
+    <div id="loanForm" class="form-container d-none">
         <form action="{{ url_for('create_functions.crear_prestamo') }}" method="POST">
             {{form.hidden_tag()}}
             <div class="form-group">

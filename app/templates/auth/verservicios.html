@@ -11,12 +11,12 @@
 <div class="services-section">
     <h1 class="mb-4">Mis Servicios</h1>
 
-    <div class="add-service-btn" onclick="toggleServiceForm()">
+    <div class="add-service-btn">
         <i class="fas fa-plus-circle mr-2"></i>Agregar Servicio
     </div>
 
     <!-- Service Form -->
-    <div id="service-form-container" class="form-container">
+    <div id="serviceForm" class="form-container d-none">
         <form action="{{ url_for('create_functions.crear_servicio') }}" method="POST">
 
             {{form.hidden_tag()}}
@@ -141,7 +141,7 @@
 
 <script>
     function toggleServiceForm() {
-        var formContainer = document.getElementById('service-form-container');
+        var formContainer = document.getElementById('serviceForm');
         formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
     }
     function confirmarEliminacion(event, nombreServicio) {

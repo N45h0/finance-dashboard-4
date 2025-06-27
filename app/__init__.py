@@ -82,7 +82,13 @@ def create_app():
         nonce = getattr(g, 'csp_nonce', '')
         csp = (
             f"default-src 'self'; "
-            f"script-src 'self' 'nonce-{nonce}' https://accounts.google.com https://apis.google.com https://cdn.jsdelivr.net 'sha256-LnIcMTTMRZTNS6HkTiExB0sk5mPuVe0yVzmaBz8GaIY='; "
+            f"script-src 'self' 'nonce-{nonce}' https://accounts.google.com https://apis.google.com https://cdn.jsdelivr.net "
+            f"'sha256-LnIcMTTMRZTNS6HkTiExB0sk5mPuVe0yVzmaBz8GaIY=' "
+            f"'sha256-QXO/FtpQSdak+NPzpmXEV2II06LOnlwc3GUKMsIbneQ=' "
+            f"'sha256-/uYgjRq9QRyx/IIqPUL6pFDeN2ao+z2+0qWMTpsxQew=' "
+            f"'sha256-vEXgWMVJAbeHnQRdDaUuIBdzV34G8SxJ7DHkD28UChA=' "
+            f"'sha256-ieoeWczDHkReVBsRBqaal5AFMlBtNjMzgwKvLqi/tSU=' "
+            f"'unsafe-hashes'; "
             f"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
             f"font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; "
             f"img-src 'self' data: https://*.googleusercontent.com; "
