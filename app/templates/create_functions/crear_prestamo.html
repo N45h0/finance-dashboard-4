@@ -12,44 +12,44 @@
 
 {% block content %}
     <form action="" method="POST">
-        {{form.hidden_tag()}}
+        {{ form.hidden_tag() }}
         <div class="form-group mb-2">
-            {{form.nombre.label(class="form-label")}
-            {{form.nombre(class="form-control", placeholder="Ej: Préstamo personal, Préstamo auto, etc.")}
+            {{ form.nombre.label(class="form-label") }}
+            {{ form.nombre(class="form-control", placeholder="Ej: Préstamo personal, Préstamo auto, etc.") }}
             <small class="form-text text-muted">Nombre identificatorio para el préstamo.</small>
         </div>
         <div class="form-group mb-2">
-            {{form.titular.label(class="form-label")}
-            {{form.titular(class="form-control", placeholder="Nombre del titular")}
+            {{ form.titular.label(class="form-label") }}
+            {{ form.titular(class="form-control", placeholder="Nombre del titular") }}
         </div>
         <div class="form-group mb-2">
-            {{form.precio.label(class="form-label")}
-            {{form.precio(class="form-control", placeholder="Monto total del préstamo (solo números)")}
+            {{ form.precio.label(class="form-label") }}
+            {{ form.precio(class="form-control", placeholder="Monto total del préstamo (solo números)") }}
         </div>
         <div class="form-group mb-2">
-            {{form.cuota.label(class="form-label")}
-            {{form.cuota(class="form-control", placeholder="Cantidad de cuotas (ej: 12)")}
+            {{ form.cuota.label(class="form-label") }}
+            {{ form.cuota(class="form-control", placeholder="Cantidad de cuotas (ej: 12)") }}
         </div>
         <div class="form-group mb-2">
-            <label for="{{form.tea.id}}" class="form-label">Tasa de Interés</label>
-            {{form.tea(class="form-control", placeholder="Ej: 45.5 para 45,5% anual")}
+            <label for="{{ form.tea.id }}" class="form-label">Tasa de Interés</label>
+            {{ form.tea(class="form-control", placeholder="Ej: 45.5 para 45,5% anual") }}
             <small class="form-text text-muted">Ingrese la tasa anual en porcentaje, solo el número (ejemplo: 45.5 para 45,5%)</small>
         </div>
         <div class="form-group mb-2">
-            {{form.fecha_vencimiento.label(class="form-label")}
-            {{form.fecha_vencimiento(class="form-control", placeholder="Fecha de vencimiento")}
+            {{ form.fecha_vencimiento.label(class="form-label") }}
+            {{ form.fecha_vencimiento(class="form-control", placeholder="Fecha de vencimiento") }}
         </div>
         <div class="form-group mb-2">
             <label for="cuenta" class="form-label">Cuenta asociada</label>
             <select name="cuenta" class="form-select">
                 {% for account in accounts %}
-                    <option value="{{account.id}}">{{account.account_name}}</option>
+                    <option value="{{ account.id }}">{{ account.account_name }}</option>
                 {% endfor %}
             </select>
         </div>
         {% if accounts %}
             <div class="form-group mt-3">
-                {{form.submit(class="btn btn-primary")}}
+                {{ form.submit(class="btn btn-primary") }}
             </div>
         {% else %}
             <p>Para crear un préstamo necesitas una cuenta</p>
