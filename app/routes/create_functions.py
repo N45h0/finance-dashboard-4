@@ -40,7 +40,7 @@ def crear_cuenta():
 
             AccountController().create_account(nombre,tarjeta,current_user.id,saldo)
             flash("¡Cuenta creada exitosamente!", "success")
-            return redirect("/index")
+            return redirect("/vercuentas")
         else:
             return "false"
     flash("Ocurrió un error al crear la cuenta. Intenta nuevamente.")
@@ -100,7 +100,7 @@ def crear_ingreso_programado():
             account_id      = int(request.form.get("cuenta"))
             ScheduledIncomeController().create_income(nombre,fecha,monto,current_user.id,descripcion,categoria=categoria,next_income=proximo_pago,received_amount=0,pending_amount=monto,account_id=account_id)
             flash("¡Ingreso programado creado exitosamente!", "success")
-            return redirect("/index")
+            return redirect("/veringresosprogramados")
         
 
 @create_functions_bp.route("/crearservicio",methods=["GET","POST"])
@@ -126,7 +126,7 @@ def crear_servicio():
             cuenta      = int(request.form.get("cuenta"))
             ServiceController().create_service(nombre,descripcion,fecha,categoria,current_user.id,precio,precio,cuenta,vencimiento)
             flash("¡Servicio creado exitosamente!", "success")
-            return redirect("/")
+            return redirect("/verservicios")
         else:
             return render_template("auth/verservicios.html",form=form)
 
@@ -151,7 +151,7 @@ def crear_prestamo():
             cuenta      = int(request.form.get("cuenta"))
             LoanController().create_loan(nombre,titular,precio,cuota,current_user.id,cuenta,precio,fecha,vencimiento,descripcion,tea)
             flash("¡Préstamo creado exitosamente!", "success")
-            return redirect("/index")
+            return redirect("/verprestamos")
         else:
             print("error")
             return render_template("create_functions/crear_prestamo.html",form=form)

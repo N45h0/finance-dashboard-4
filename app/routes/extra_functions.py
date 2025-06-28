@@ -227,6 +227,7 @@ def borrar_prestamo(id:int):
     else:
         if loan.user_id == current_user.id:
             LoanController().delete_loan(loan)
+            flash("¡Tu préstamo fue eliminado exitosamente!", "success")
             return redirect("/verprestamos")
         else:
             return render_template("extra_functions/error-message/eliminated_error.html",objeto="prestamo")
@@ -241,6 +242,7 @@ def borrar_servicio(id:int):
     else:
         if service.user_id == current_user.id:
             ServiceController().delete_service(service)
+            flash("¡Tu servicio fue eliminado exitosamente!", "success")
             return redirect("/verservicios")
         else:
             return render_template("extra_functions/error-message/eliminated_error.html",objeto="servicio")
@@ -255,6 +257,7 @@ def borrar_cuenta(id:int):
     else:
         if account.user_id == current_user.id:
             AccountController().delete_account(account)
+            flash("¡Tu cuenta fue eliminada exitosamente!", "success")
             return redirect("/vercuentas")
         else:
             return render_template("extra_functions/error-message/eliminated_error.html",objeto="cuenta")
@@ -269,6 +272,7 @@ def borrar_ingreso(id:int):
     else:
         if income.user_id == current_user.id:
             IncomeController().delete_income(income)
+            flash("¡Tu ingreso fue eliminado exitosamente!", "success")
             return redirect("/veringresos")
         else:
             return render_template("extra_functions/error-message/eliminated_error.html",objeto="ingreso")
@@ -283,6 +287,7 @@ def borrar_ingresoprogramado(id:int):
     else:
         if income.user_id == current_user.id:
             ScheduledIncomeController().delete_income(income)
+            flash("¡Tu ingreso programado fue eliminado exitosamente!", "success")
             return redirect("/veringresosprogramados")
         else:
             return render_template("extra_functions/error-message/eliminated_error.html",objeto="ingreso programado")

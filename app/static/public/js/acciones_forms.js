@@ -29,8 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Confirmar eliminación de cuenta
     document.querySelectorAll("form[data-confirm-eliminar]").forEach(form => {
         form.addEventListener("submit", function(event) {
-            const nombreCuenta = this.getAttribute("data-nombre-cuenta") || "la cuenta";
-            if (!confirm(`¿Estás seguro de que quieres eliminar la cuenta "${nombreCuenta}"? Esta acción no se puede deshacer.`)) {
+            const nombre = this.getAttribute("data-nombre-cuenta") || "el elemento";
+            let tipo = "elemento";
+            if (this.action.includes("borrar_cuenta")) tipo = "cuenta";
+            else if (this.action.includes("borrar_servicio")) tipo = "servicio";
+            else if (this.action.includes("borrar_prestamo")) tipo = "préstamo";
+            else if (this.action.includes("borrar_ingreso")) tipo = "ingreso";
+            if (!confirm(`¿Estás seguro de que quieres eliminar tu ${tipo} "${nombre}"? Esta acción no se puede deshacer.`)) {
                 event.preventDefault();
             }
         });

@@ -4,7 +4,7 @@ Funciones del usuario
 """
 
 #modulos externos
-from flask                                import Blueprint,render_template,redirect,request
+from flask                                import Blueprint,render_template,redirect,request,flash
 from flask_login                          import current_user,login_required
 
 #modulos propios
@@ -61,6 +61,7 @@ def recibir_ingreso_programado():
 
             ScheduledIncomeController().update_income(scheduled_income)
             UserController().update_user(usuario)
+            flash("¡Ingreso programado recibido y actualizado exitosamente!", "success")
             return redirect("/veringresosprogramados")
 
 @update_functions_bp.route("/actualizaringresoprogramado",methods=["GET","POST"])
@@ -87,7 +88,8 @@ def actualizar_ingreso_programado():
             scheduled_income.description = descripcion
             scheduled_income.amount = monto
             ScheduledIncomeController().update_income(scheduled_income) 
-            return redirect("/index")
+            flash("¡Ingreso programado actualizado exitosamente!", "success")
+            return redirect("/veringresosprogramados")
 
 @update_functions_bp.route("/actualizar_cuenta",methods=["GET","POST"])
 @login_required
@@ -106,7 +108,8 @@ def actualizar_cuenta():
             account.account_name =nombre
             account.card         = tarjeta
             AccountController().update_account(account)
-            return redirect("/")
+            flash("¡Cuenta actualizada exitosamente!", "success")
+            return redirect("/vercuentas")
 
 
         
@@ -137,7 +140,8 @@ def actualizar_ingreso():
             IncomeController().update_income(income)
             user.balance += income.amount
             UserController().update_user(user)
-            return redirect("/")
+            flash("¡Ingreso actualizado exitosamente!", "success")
+            return redirect("/veringresos")
         
 @update_functions_bp.route("/actualizar_prestamo",methods=["GET","POST"])
 @login_required
@@ -165,7 +169,8 @@ def actualizar_prestamo():
             loan.expiration_date = vencimiento
             loan.reamining_price = precio
             LoanController().update_loan(loan)
-            return redirect("/")
+            flash("¡Préstamo actualizado exitosamente!", "success")
+            return redirect("/verprestamos")
 
 @update_functions_bp.route("/actualizar_servicio",methods=["GET","POST"])
 @login_required
@@ -191,4 +196,5 @@ def actualizar_servicio():
             service.price           = precio
             service.reamining_price = precio
             ServiceController().update_service(service)
-            return redirect("/")
+            flash("¡Servicio actualizado exitosamente!", "success")
+            return redirect("/verservicios")
