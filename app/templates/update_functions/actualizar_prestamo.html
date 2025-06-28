@@ -1,36 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Préstamo</title>
-    <script src="{{url_for('static',filename='js/update/update_loan.js')}}" defer></script>
+    {% include 'includes/head.html' %}
+    {% block title %}Actualizar Préstamo{% endblock %}
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <script src="{{url_for('static',filename='js/update/update_loan.js')}}" defer></script>
+    {% endblock %}
 </head>
 <body>
-    <form action="" method="POST">
-        {{form.hidden_tag()}}
-        {{form.nombre.label()}}
-        {{form.nombre(id="name")}}
-        {{form.titular.label()}}
-        {{form.titular(id="holder")}}  
-        {{form.precio.label()}}
-        {{form.precio(id="price")}} 
-        {{form.cuota.label()}}
-        {{form.cuota(id="quota")}}      
-        {{form.tea.label()}}
-        {{form.tea(id="tea")}}   
-        {{form.fecha_vencimiento.label()}}
-        {{form.fecha_vencimiento(id="expiration_date")}} 
-        <select name="loan" id="loan_object">
-            {% for loan in loans %}
-                <option value="{{loan.id}}">{{loan.loan_name}}</option>
-            {% endfor %}
-        </select>
-        {% if loans %}
-            {{form.submit()}}
-        {% else %}
-            <p>No tienes préstamos que actualizar</p>
-        {% endif %}
-    </form>
+    {% include 'includes/navbar.html' %}
+    <div class="container mt-5">
+        <h1>Actualizar Préstamo</h1>
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            <div class="form-group mb-2">
+                {{form.nombre.label(class="form-label")}} 
+                {{form.nombre(id="name", class="form-control", placeholder="Ej: Préstamo personal, Préstamo auto, etc.")}}
+                <small class="form-text text-muted">Nombre identificatorio para el préstamo.</small>
+            </div>
+            <div class="form-group mb-2">
+                {{form.titular.label(class="form-label")}} 
+                {{form.titular(id="holder", class="form-control", placeholder="Nombre del titular")}}
+            </div>
+            <div class="form-group mb-2">
+                {{form.precio.label(class="form-label")}} 
+                {{form.precio(id="price", class="form-control", placeholder="Monto total del préstamo (solo números)")}}
+            </div>
+            <div class="form-group mb-2">
+                {{form.cuota.label(class="form-label")}} 
+                {{form.cuota(id="quota", class="form-control", placeholder="Cantidad de cuotas (ej: 12)")}}
+            </div>
+            <div class="form-group mb-2">
+                <label for="tea" class="form-label">Tasa de Interés</label>
+                {{form.tea(id="tea", class="form-control", placeholder="Ej: 45.5 para 45,5% anual")}}
+                <small class="form-text text-muted">Ingrese la tasa anual en porcentaje, solo el número (ejemplo: 45.5 para 45,5%)</small>
+            </div>
+            <div class="form-group mb-2">
+                {{form.fecha_vencimiento.label(class="form-label")}} 
+                {{form.fecha_vencimiento(id="expiration_date", class="form-control", placeholder="Fecha de vencimiento")}}
+            </div>
+            <div class="form-group mb-2">
+                <label for="loan_object" class="form-label">Selecciona el préstamo a editar</label>
+                <select name="loan" id="loan_object" class="form-select">
+                    {% for loan in loans %}
+                        <option value="{{loan.id}}">{{loan.loan_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% if loans %}
+                <div class="form-group mt-3">
+                    {{form.submit(class="btn btn-primary")}}
+                </div>
+            {% else %}
+                <p>No tienes préstamos que actualizar</p>
+            {% endif %}
+        </form>
+    </div>
+    {% include 'includes/footer.html' %}
 </body>
 </html>

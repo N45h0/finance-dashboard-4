@@ -9,13 +9,19 @@
     <h1>Cambiar email</h1>
     <form action="" method="POST">
         {{form.hidden_tag()}}
-        {{form.email.label()}}
-        {{form.email()}}
-        {{form.confirmar.label()}}
-        {{form.confirmar()}}
-        {{form.submit()}}
-
-
+        <div class="form-group mb-2">
+            {{form.email.label(class="form-label")}}
+            {{form.email(class="form-control", placeholder="Nuevo correo electrónico")}}
+            <small class="form-text text-muted">Introduce tu nuevo correo electrónico.</small>
+        </div>
+        <div class="form-group mb-2">
+            {{form.confirmar.label(class="form-label")}}
+            {{form.confirmar(class="form-control", placeholder="Confirma tu nuevo correo")}}
+            <small class="form-text text-muted">Vuelve a escribir el nuevo correo para confirmar.</small>
+        </div>
+        <div class="form-group mt-3">
+            {{form.submit(class="btn btn-primary")}}
+        </div>
     </form>
 </body>
 </html>

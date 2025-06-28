@@ -5,26 +5,39 @@
 {% block title %}Crear Ingreso Programado{% endblock %}
 
 {% block head %}
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>Crear Ingreso Programado</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <form action="" method="POST">
         {{form.hidden_tag()}}
-        {{form.nombre.label()}}
-        {{form.nombre()}}
-        {{form.monto.label()}}
-        {{form.monto()}}
-        {{form.descripcion.label()}}
-        {{form.descripcion()}}
-        {{form.categoria.label()}}
-        {{form.categoria()}}
-        {{form.proximo_pago.label()}}
-        {{form.proximo_pago()}}
-        {{form.submit()}}
+        <div class="form-group mb-2">
+            {{form.nombre.label(class="form-label")}} 
+            {{form.nombre(class="form-control", placeholder="Ej: Alquiler, Suscripción, etc.")}}
+            <small class="form-text text-muted">Nombre identificatorio para el ingreso programado.</small>
+        </div>
+        <div class="form-group mb-2">
+            {{form.monto.label(class="form-label")}} 
+            {{form.monto(class="form-control", placeholder="Monto a recibir (solo números)")}}
+        </div>
+        <div class="form-group mb-2">
+            {{form.descripcion.label(class="form-label")}} 
+            {{form.descripcion(class="form-control", placeholder="Descripción breve (opcional)")}}
+        </div>
+        <div class="form-group mb-2">
+            {{form.categoria.label(class="form-label")}} 
+            {{form.categoria(class="form-control")}}
+            <small class="form-text text-muted">Selecciona la categoría que mejor describa el ingreso.</small>
+        </div>
+        <div class="form-group mb-2">
+            {{form.proximo_pago.label(class="form-label")}} 
+            {{form.proximo_pago(class="form-control", placeholder="Próxima fecha de cobro")}}
+        </div>
+        <div class="form-group mt-3">
+            {{form.submit(class="btn btn-primary")}}
+        </div>
     </form>
-</body>
+{% endblock %}
 </html>

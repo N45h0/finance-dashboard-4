@@ -10,13 +10,19 @@
     <h1>Cambiar contraseña</h1>
     <form action="" method="POST">
         {{form.hidden_tag()}}
-        {{form.clave.label()}}
-        {{form.clave()}}
-        {{form.confirmar.label()}}
-        {{form.confirmar()}}
-        {{form.submit()}}
-
-
+        <div class="form-group mb-2">
+            {{form.clave.label(class="form-label")}} 
+            {{form.clave(class="form-control", placeholder="Nueva contraseña")}} 
+            <small class="form-text text-muted">Introduce tu nueva contraseña. Debe ser segura y fácil de recordar.</small>
+        </div>
+        <div class="form-group mb-2">
+            {{form.confirmar.label(class="form-label")}} 
+            {{form.confirmar(class="form-control", placeholder="Confirma la nueva contraseña")}} 
+            <small class="form-text text-muted">Vuelve a escribir la nueva contraseña para confirmar.</small>
+        </div>
+        <div class="form-group mt-3">
+            {{form.submit(class="btn btn-primary")}} 
+        </div>
     </form>
 </body>
 </html>
