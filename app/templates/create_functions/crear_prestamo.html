@@ -2,16 +2,15 @@
 <html lang="es">
 {% extends 'base.html' %}
 
-{% block title %}Crear Prestamo{% endblock %}
+{% block title %}Crear Préstamo{% endblock %}
 
 {% block head %}
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>Crear Préstamo</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <form action="" method="POST">
         {{form.hidden_tag()}}
         {{form.nombre.label()}}
@@ -34,8 +33,8 @@
         {% if accounts %}
             {{form.submit()}}
         {% else %}
-            <p>Para crear una préstamo necesitas una cuenta</p>
+            <p>Para crear un préstamo necesitas una cuenta</p>
         {% endif %}
     </form>
-</body>
+{% endblock %}
 </html>
