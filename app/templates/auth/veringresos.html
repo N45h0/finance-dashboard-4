@@ -18,50 +18,31 @@
     <!-- Income Form -->
     <div id="incomeForm" class="form-container d-none">
         <form action="{{ url_for('create_functions.crear_ingreso') }}" method="POST">
-            {{form.hidden_tag()}}
-            <div class="form-group">
-                {{form.nombre.label(for="income_name")}}
-                {{form.nombre(id="income_name")}}
+            {{ form.hidden_tag() }}
+            <div class="form-group mb-2">
+                {{ form.nombre.label(class="form-label") }}
+                {{ form.nombre(class="form-control", placeholder="Ej: Sueldo, Venta, Regalo, etc.") }}
+                <small class="form-text text-muted">Nombre identificatorio para el ingreso.</small>
             </div>
-            <div class="form-group">
-                {{form.monto.label(for="amount")}}
-                {{form.monto(id="amount")}}
+            <div class="form-group mb-2">
+                {{ form.fecha_pago.label(class="form-label") }}
+                {{ form.fecha_pago(class="form-control", placeholder="Fecha de cobro") }}
             </div>
-            <div class="form-group">
-                {{form.descripcion.label(for="description")}}
-                {{form.descripcion(id="description")}}
+            <div class="form-group mb-2">
+                {{ form.monto.label(class="form-label") }}
+                {{ form.monto(class="form-control", placeholder="Monto recibido (solo números)") }}
             </div>
-            <div class="form-group">
-                {{form.categoria.label(for="category")}}
-                <div class="radio-group">
-                    {% for subfield in form.categoria %}
-                        <label for="{{ subfield.id }}">
-                            {{ subfield() }} {{ subfield.label.text }}
-                        </label>
-                    {% endfor %}
-                </div>
+            <div class="form-group mb-2">
+                {{ form.descripcion.label(class="form-label") }}
+                {{ form.descripcion(class="form-control", placeholder="Descripción breve (opcional)") }}
             </div>
-            <div class="form-group">
-                {{form.fecha_pago.label(for="date")}}
-                {{form.fecha_pago(id="date")}}
+            <div class="form-group mb-2">
+                {{ form.categoria.label(class="form-label") }}
+                {{ form.categoria(class="form-control") }}
+                <small class="form-text text-muted">Selecciona la categoría que mejor describa el ingreso.</small>
             </div>
-            <div class="form-group">
-                <label for="">Cuenta asociada</label>
-                <select name="cuenta" class="custom-select mb-4">
-                    {% for account in accounts %}
-                        <option value="{{account.id}}">{{account.account_name}}</option>
-                    {% endfor %}
-                </select>
-                {% if accounts %}
-                    <div class="form-group">
-                        {{ form.submit() }}
-                    </div> 
-                {% else %}
-                    <div class="form-group-message">
-                        <p>Necesitas una cuenta para registrar un ingreso</p>
-                    </div> 
-                {% endif %}
-
+            <div class="form-group mt-3">
+                {{ form.submit(class="btn btn-primary") }}
             </div>
         </form>
     </div>
