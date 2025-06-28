@@ -26,7 +26,12 @@
             </div>
             <div class="form-group mb-2">
                 {{ form.tarjeta.label(class="form-label") }}
-                {{ form.tarjeta(class="form-control", placeholder="Número de tarjeta (opcional)") }}
+                {{ form.tarjeta(class="form-control", placeholder="Número de Cuenta/Tarjeta (opcional)") }}
+            </div>
+            <div class="form-group mb-2">
+                {{ form.saldo.label(class="form-label") }}
+                {{ form.saldo(class="form-control", placeholder="Saldo actual (opcional)") }}
+                <small class="form-text text-muted">Ingresa el saldo actual de la cuenta si lo deseas.</small>
             </div>
             <div class="form-group mt-3">
                 {{ form.submit(class="btn btn-primary") }}

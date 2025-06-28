@@ -34,7 +34,14 @@
             </div>
             <div class="form-group mb-2">
                 {{ form.categoria.label(class="form-label") }}
-                {{ form.categoria(class="form-control") }}
+                <div class="radio-group">
+                    {% for subfield in form.categoria %}
+                        <div class="form-check form-check-inline">
+                            {{ subfield(class="form-check-input") }}
+                            <label class="form-check-label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
                 <small class="form-text text-muted">Selecciona la categoría que mejor describa el ingreso.</small>
             </div>
             <div class="form-group mb-2">
