@@ -95,11 +95,11 @@
                                 {% if income.received_amount == income.amount %}
                                     <div class="badge bg-success text-white">Pagos recibidos</div>
                                 {% else %}
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="dropdown position-relative">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-boundary="viewport">
                                             ⋮
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu dropdown-menu-end position-absolute">
                                             <li>
                                                 <a class="dropdown-item" href="{{ url_for('update_functions.recibir_ingreso_programado') }}">
                                                     <i class="fas fa-check-circle"></i> Registrar pago
