@@ -8,6 +8,7 @@ alembic
 itsdangerous
 Werkzeug
 WTForms
+email_validator
 
 # --- Solo si los usas para formularios y login ---
 Flask-Login

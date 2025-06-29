@@ -64,7 +64,15 @@ def crear_ingreso():
             descripcion     = form.descripcion.data
             categoria       = form.categoria.data
             monto           = form.monto.data
-            account_id      = int(request.form.get("cuenta"))
+            cuenta_valor    = request.form.get("cuenta")
+            if cuenta_valor is None:
+                flash("Debes seleccionar una cuenta para el ingreso.", "error")
+                return redirect(request.url)
+            try:
+                account_id = int(cuenta_valor)
+            except ValueError:
+                flash("Cuenta inválida.", "error")
+                return redirect(request.url)
             IncomeController().create_income(nombre,fecha,monto,current_user.id,descripcion,categoria,account_id)
 
             #actualizamos el saldo total del usuario
@@ -77,6 +85,11 @@ def crear_ingreso():
             AccountController().update_account(account)
             flash("¡Ingreso registrado exitosamente!", "success")
             return redirect("/veringresos")
+        else:
+            flash("Ocurrió un error al validar el formulario.", "error")
+            return redirect(request.url)
+    flash("Ocurrió un error al crear el ingreso. Intenta nuevamente.")
+    return redirect(request.url)
 
 
 @create_functions_bp.route("/crearingresoprogramado",methods=["GET","POST"])

@@ -98,6 +98,15 @@ body {
       outline: none; /* Elimina el contorno cuando se hace clic */
   }
 
+  /* Ajuste para las notificaciones flash en la esquina inferior derecha */
+.position-fixed.bottom-0.end-0.p-3 {
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    max-width: 350px;
+}
+
 @media (max-width: 991.98px) {
     .user-info {
         margin-top: 1rem;

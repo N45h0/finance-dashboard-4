@@ -8,10 +8,12 @@ def no_enter(func):
     """
     def wrap(*args,**kwargs):
         try:
-            user = User().get_by_id(current_user.id)
-            if user:
-                return redirect("/index")
-        except:
-            return func(*args,**kwargs)
+            if current_user.is_authenticated:
+                user = User().get_by_id(current_user.id)
+                if user:
+                    return redirect("/index")
+        except Exception:
+            pass
+        return func(*args,**kwargs)
     wrap.__name__ = func.__name__
     return wrap
